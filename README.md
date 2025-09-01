@@ -4,7 +4,7 @@ A simple **command-line interface (CLI)** application built with **Python, SQLAl
 
 ---
 
-## 📦 Features
+##  Features
 - List professors, courses, and course assignments.
 - Data is stored in a SQLite database using SQLAlchemy ORM.
 - Relationships are modeled between Professors, Courses, and CourseAssignments.
@@ -13,7 +13,7 @@ A simple **command-line interface (CLI)** application built with **Python, SQLAl
 
 ---
 
-## 🚀 Setup Instructions
+##  Setup Instructions
 
 1. Clone this repository.
 2. Install dependencies:
