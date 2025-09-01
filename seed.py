@@ -1,36 +1,25 @@
 from database import SessionLocal, init_db
-from models import Professor, Course, CourseAssignment
+from models import Student, Professor, Course, CourseAssignment
 
-# Initialize tables
-init_db()
+def seed_data():
+    init_db()
+    session = SessionLocal()
 
-# Open a session
-session = SessionLocal()
+    professor1 = Professor(name="Dr. Smith", department="Math", rank="Associate")
+    professor2 = Professor(name="Dr. Johnson", department="CS", rank="Full")
 
-try:
-    # Create professors
-    p1 = Professor(name="Ken Block", department="Computer Science", rank="Associate Professor")
-    p2 = Professor(name="Bobby Johnson", department="Data Science", rank="Lecturer")
+    course1 = Course(title="Calculus", code="MATH101", credits=4)
+    course2 = Course(title="Algorithms", code="CS201", credits=3)
 
-    # Create courses
-    c1 = Course(title="Computer Science", code="CS101", credits=3)
-    c2 = Course(title="Data Science", code="CS102", credits=4)
-    c3 = Course(title="Cyber Security", code="MATH201", credits=3)
+    student1 = Student(name="Alice", email="alice@example.com", major="Math")
+    student2 = Student(name="Bob", email="bob@example.com", major="CS")
 
-    session.add_all([p1, p2, c1, c2, c3])
+    assignment1 = CourseAssignment(professor=professor1, course=course1, semester="Fall 2024")
+    assignment2 = CourseAssignment(professor=professor2, course=course2, semester="Spring 2025")
+
+    session.add_all([professor1, professor2, course1, course2, student1, student2, assignment1, assignment2])
     session.commit()
-
-    # Assign courses
-    a1 = CourseAssignment(professor_id=p1.id, course_id=c1.id, semester="First 2025")
-    a2 = CourseAssignment(professor_id=p2.id, course_id=c3.id, semester="Second 2025")
-
-    session.add_all([a1, a2])
-    session.commit()
-
-    print("✅ Database seeded successfully.")
-
-except Exception as e:
-    session.rollback()
-    print(f"❌ Error while seeding: {e}")
-finally:
     session.close()
+
+if __name__ == "__main__":
+    seed_data()
